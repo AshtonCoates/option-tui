@@ -8,10 +8,11 @@ use ratatui::{
     layout::{Constraint, Direction, Layout},
     Terminal,
 };
-use yahoo_finance_api as yahoo;
 use crossterm::{event, execute, terminal};
 use std::{io, time::Duration};
 use tokio::sync::mpsc;
+
+pub mod yahoo_api;
 
 #[derive(Debug)]
 struct Point(f64, f64);

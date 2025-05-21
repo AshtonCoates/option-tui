@@ -11,3 +11,7 @@ tokio-tungstenite = "0.21"                                # live WebSocket optio
 serde          = { version = "1", features = ["derive"] } # parse JSON
 anyhow         = "1"                                      # ergonomic error handling
 yahoo_finance_api = "4.0.0"
+tokio-test = "0.4.4"
+time = "0.3.41"
+reqwest = "0.12.15"
+regex = "1.11.1"
