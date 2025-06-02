@@ -1,0 +1,12 @@
+#chain {
+    height: 1fr;                    /* fill the available space */
+    border: solid red;
+}
+#chain .datatable--header-cell {
+    background: navy;
+    color: white;
+}
+#chain .datatable--cursor-row {
+    background: rgb(40,40,90);
+}
+

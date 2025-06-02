@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "options-dash"
+version = "0.1.0"
+description = "Live Yahoo options-chain dashboard built with Textual"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+  "textual>=0.47",   # runtime only
+  "yfinance>=0.2",   # data source
+]
+
+[project.scripts]              # console entry point
+options-dash = "options_dash.app:run"   # (see helper below)
+
+[tool.setuptools]
+package-data = { "options_dash" = ["*.tcss"] }  # ship styles
