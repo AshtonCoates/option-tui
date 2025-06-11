@@ -2,23 +2,40 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Iterable, List
 
-import yfinance as yf
 from textual.widgets import DataTable
 from textual.message import Message
 
 
 @dataclass
 class ContractRow:
-    kind: str       # "C" / "P"
+    call_iv: float
+    # call_oi: int
+    call_last: float
+    call_bid: float
+    call_ask: float
     strike: float
-    last: float
-    bid: float
-    ask: float
-    iv: float
-    oi: int
+    put_ask: float
+    put_bid: float
+    put_last: float
+    # put_oi: int
+    put_iv:float
 
     def as_row(self) -> List[str | float | int]:
-        return [self.kind, self.strike, self.last, self.bid, self.ask, self.iv, self.oi]
+        row = [
+            self.call_iv,
+            # self.call_oi,
+            self.call_last,
+            self.call_bid,
+            self.call_ask,
+            self.strike,
+            self.put_ask,
+            self.put_bid,
+            self.put_last,
+            # self.put_oi,
+            self.put_iv
+        ]
+
+        return row
 
 
 class ChainUpdate(Message):
@@ -36,11 +53,11 @@ class OptionTable(DataTable):
     cursor_type = "row"
 
     def on_mount(self) -> None:
-        headers = ["Type", "Strike", "Last", "Bid", "Ask", "IV", "OI"]
+        headers = ["C IV", "C Last", "C Bid", "C Ask",
+                   "Strike", "P Ask", "P Bid", "P Last", "P IV"]
         self.add_columns(*headers)
 
     async def on_chain_update(self, msg: ChainUpdate) -> None:
         """Replace all rows with the newest chain snapshot."""
         self.clear()
         self.add_rows([r.as_row() for r in msg.rows])
-
